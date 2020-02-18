@@ -1,0 +1,44 @@
+pipeline
+{
+  agent any 
+      stages{
+             stage('One')
+                         {
+                         steps{echo"Hi,This is shikha"}
+                         }      
+             
+             stage('two')
+                         {
+                         steps{input('Do you want to proceed?')}
+                         } 
+ 
+              stage('three')
+                         {
+                         steps{echo'Hello'}
+                         } 
+            
+              stage('Four')
+                         {
+                          parallel{
+                              stage('Unit Test')
+                                    {
+                                     steps{echo'Running Unit Test'}
+                                    }
+                             
+                              stage('Integration Test')
+                                    {
+                                      agent{
+                                           docker{
+                                                reuseNode False
+                                                 image 'Centos'
+                                                 }
+
+                                           }
+                                     steps{echo"Running Integration Test"}
+                                    }                          
+ }   
+            
+           
+
+
+}
