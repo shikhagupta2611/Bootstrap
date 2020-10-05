@@ -1,3 +1,0 @@
-# Jenkin jenkin
-
-code push
